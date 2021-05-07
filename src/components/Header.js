@@ -1,8 +1,18 @@
 import styled from "styled-components"
 import React from 'react'
+import {auth,provider} from '../firebase/firebase';
 
 function Header() {
-    return (
+ // handle auth
+ const handleAuth=()=>{
+//sign in with google auth Popup provider
+     auth.signInWithPopup(provider)
+     //return a promise
+     .then(result=>console.log(result))
+     //catch if there is an error
+     .catch(error=>alert(error.massage));
+ }
+return (
         <Nav>
            <Logo>
                <img
@@ -41,7 +51,7 @@ function Header() {
                    </span>
                    </a>
            </NavMenu>
-            <Login>
+            <Login onClick={handleAuth}>
                 Login
             </Login>
 
@@ -145,7 +155,7 @@ const NavMenu=styled.div`
   border-radius: 4px;
   transition: all 0.2s ease 0s;
    &:hover{
-       background-color: #f9f9f9;
+       background-color: #f9f9f9; 
        color: #000;
        border-color: transparent;
    }
