@@ -16,7 +16,35 @@ function Header() {
                       HOME
                    </span>
                    </a>
+                <a href="/search">
+                       <img src="/img/search-icon.svg" alt="SEARCH"/>
+                   <span>
+                      SEARCH
+                   </span>
+                   </a>
+                <a>
+                <img src="/img/watchlist-icon.svg" alt="HOME"/>
+                   <span>
+                      WATCHLIST
+                   </span>
+                   </a>
+                <a href="/original">
+                       <img src="/img/original-icon.svg" alt="HOME"/>
+                   <span>
+                      ORIGINALS
+                   </span>
+                   </a>
+                <a href="/movies">
+                       <img src="/img/movie-icon.svg" alt="HOME"/>
+                   <span>
+                      MOVIE
+                   </span>
+                   </a>
            </NavMenu>
+            <Login>
+                Login
+            </Login>
+
         </Nav>
     )
 }
@@ -74,9 +102,9 @@ const NavMenu=styled.div`
       }
       span{
          color: rgb(249,249,249);
-         font-size: 13px;
-         letter-spacing:1.42;
-         line-height:1.03;
+         font-size: 12px;
+         letter-spacing:1.42px;
+         line-height:1.08px;
          padding: 2px 0px; 
          white-space: nowrap;
          position:relative;
@@ -103,41 +131,24 @@ const NavMenu=styled.div`
       span:before {
           transform: scaleX(1);
           visibility: visible;
-          opacity: 1;
+          opacity: 1 !important;
      }
     }
   }
 `;
- 
-// &:before{
-//     background-color: rgb(249,249,249);
-//     border-radius:0px 0px 4px 4px;
-//     bottom:-6px;
-//     content:"";
-//     height:2px;
-//     left:0px
-//     opacity:0;
-//     position:absolute;
-//     right:0px;
-//     transform-origin:left center;
-//     transform:scaleX(0);
-//     transition:all 250ms cubic-bezier(0.25,0.46,0.45,0.94) 0s;
-//     visibility:hidden;
-//     width:auto;
-// }
-// }
-// &:hover{
-//     &span:before{
-//         opacity:1 !important;
-//         visibility:visible;
-//         transform:scaleX(1);
-//     }
-
-// }
-// //   @media (max-width:768px){
-// //       display:none;
-// //   }
-
-
+ const Login=styled.a`
+  background-color: rgb(0,0,0,06); 
+  padding:8px 16px;
+  text-transform:uppercase;
+  letter-spacing: 1.5px;
+  border: 1px solid #f9f9f9;
+  border-radius: 4px;
+  transition: all 0.2s ease 0s;
+   &:hover{
+       background-color: #f9f9f9;
+       color: #000;
+       border-color: transparent;
+   }
+ `;
 
 export default Header
