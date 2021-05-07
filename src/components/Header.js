@@ -80,25 +80,33 @@ const NavMenu=styled.div`
          padding: 2px 0px; 
          white-space: nowrap;
          position:relative;
-      }
-
-      &:before {
-          display:block;
+       
+         &:before {
           background-color:rgb(249,249,249);
           border-radius: 0px 0px 4px 4px;
           bottom:-6px;
           content:'';
           height: 2px;
-          opacity:0;
+          left: 0px;
+          opacity: 0;
+          right: 0px;
           position: absolute;
-          right:0px;
           transform-origin: left center;
-          transform: scale(0);
-          transition:all 250ms cubic-bezier(0.25,0.46,0.45,0.94) 0s;
-          visibility:hidden;
+          transform: scaleX(0);
+          transition: all 250ms cubic-bezier(0.25,0.46,0.45,0.94) 0s;
+          visibility: hidden;
           width:outo;
       }
   } 
+
+  &:hover {
+      span:before {
+          transform: scaleX(1);
+          visibility: visible;
+          opacity: 1;
+     }
+    }
+  }
 `;
  
 // &:before{
