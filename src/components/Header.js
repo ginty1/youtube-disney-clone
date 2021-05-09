@@ -1,25 +1,71 @@
 import styled from "styled-components"
-import React from 'react'
 import {auth,provider} from '../firebase/firebase';
+// dispatch allows to add user info to store.js select allows to retrieve info from store
+import {useDispatch,useSelector}from 'react-redux';
+import {useHistory} from 'react-router-dom';
+import {selectUserEmail, selectUserName,
+        selectUserPhoto,
+        setSignOutState,
+       setUserLoginDetails
+       } from '../features/users/userSlice';
+import Home from "./Home";
+import { useEffect } from "react";
+
+
 
 function Header() {
+const dispatch=useDispatch();
+    const history=useHistory();
+    const userName=useSelector(selectUserName);
+    const userEmail=useSelector(selectUserEmail);
+    const userPhoto=useSelector(selectUserPhoto);
+    
+    useEffect(() => {
+        // runs when userName is updated
+        auth.onAuthStateChanged(async (user)=>{
+            if(user){
+                setUser(user)
+                history.push('/home')
+            }
+        })
+    }, [userName])
+
  // handle auth
  const handleAuth=()=>{
-//sign in with google auth Popup provider
-     auth.signInWithPopup(provider)
-     //return a promise
-     .then(result=>console.log(result))
-     //catch if there is an error
-     .catch(error=>alert(error.massage));
+     if(!userName){
+
+         //sign in with google auth Popup provider
+              auth.signInWithPopup(provider)
+              //return a promise
+              .then(result=>{
+                  setUser(result.user);
+              })
+              //catch if there is an error
+              .catch(error=>alert(error.massage)
+              ); }else if (userName){
+                  auth.signOut().then(()=>{
+                      dispatch(setSignOutState());
+                      history.push("/");
+                  }).catch((error)=> alert(error.message));
+              }
  }
+//  set a user
+const setUser=user=>{
+    dispatch(
+        setUserLoginDetails({
+            name:user.displayName,
+            email:user.email,
+            photo:user.photoURL,
+        })
+    )
+}
 return (
         <Nav>
            <Logo>
                <img
                src='/img/logo.svg' alt='Disney+'/>
            </Logo>
-
-           <NavMenu>
+             <NavMenu>
                 <a href="/home">
                        <img src="/img/home-icon.svg" alt="HOME"/>
                    <span>
@@ -32,7 +78,7 @@ return (
                       SEARCH
                    </span>
                    </a>
-                <a>
+                <a href="/watchlist">
                 <img src="/img/watchlist-icon.svg" alt="HOME"/>
                    <span>
                       WATCHLIST
@@ -51,9 +97,12 @@ return (
                    </span>
                    </a>
            </NavMenu>
-            <Login onClick={handleAuth}>
-                Login
-            </Login>
+            <SignOut>
+           <userImg src={userPhoto} alt={userName}/>
+           <DropDown>
+               <span onClick={handleAuth}>Sign out </span>
+           </DropDown>
+                </SignOut> 
 
         </Nav>
     )
@@ -160,5 +209,44 @@ const NavMenu=styled.div`
        border-color: transparent;
    }
  `;
+const userImg=styled.img`
+      height:100px;
+`;
 
+const DropDown=styled.div`
+position:absolute;
+top:48px;
+right:0px;
+background:rgb(19,19,19);
+border:1px solid rgba(151,151,151,0.34);
+border-radius:4px;
+box-shadow:rgb(0 0 0 / 50%)0px 0px 18px 0px;
+padding:10px;
+font-size:14px;
+letter-spacing:3px;
+width:100px;
+opacity:0;
+
+`;
+const SignOut=styled.div`
+position:relative;
+height:48px;
+width:48px;
+display:flex;
+cursor:pointer;
+align-items:center;
+justify-content:center;
+
+${userImg}{
+    border-radius:50%;
+    width:100%;
+    height:100%;
+}
+&:hover{
+    ${DropDown}{
+     opacity:1;
+     transition-duration:2s;  
+    }
+}
+`;
 export default Header
