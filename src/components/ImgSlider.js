@@ -43,26 +43,33 @@ export default function ImgSlider(props) {
 };
 const Carousel=styled(Slider)`
  margin-top:20px;
+ 
+
  &> button{
-   opacity:0;
-   height:100%
-   width:5vw;
+   opacity: 0;
+   height:  100%
+   width: 5vw;
    z-index:1;
-   &:hover{
-     opacity:1;
-     transition: opacity 0.2s ease 0s;
+   
+     &:hover {
+       opacity: 1;
+       transition: opacity 0.2s ease 0s;
+     }
+ }  
+ ul li button{
+   &: before {
+     font-size: 10px;
+     color:rgb(150,158,171);
    }
-  }
+ }
+ li.slick-active button:before {
+   color:white;
+ }
+ .slick-prev{
+   overflow: initial;
+ }
+ .slick-prev{
+   right: -75px;
+ }
 
-
-  
-  ul li button{
-    &:before{
-      font-size: 40px;
-      color: rgb(150,158,171);
-      }
-    }
-  li.slick-active button:before {
-    color:white;
-  }
 `;
