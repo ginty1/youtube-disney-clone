@@ -8,7 +8,7 @@ import {selectUserEmail, selectUserName,
         setSignOutState,
        setUserLoginDetails
        } from '../features/users/userSlice';
-import Home from "./Home";
+
 import { useEffect } from "react";
 
 
@@ -98,7 +98,7 @@ return (
                    </a>
            </NavMenu>
             <SignOut>
-           <userImg src={userPhoto} alt={userName}/>
+           <UseImage src={userPhoto} alt={userName}/>
            <DropDown>
                <span onClick={handleAuth}>Sign out </span>
            </DropDown>
@@ -209,7 +209,7 @@ const NavMenu=styled.div`
        border-color: transparent;
    }
  `;
-const userImg=styled.img`
+const UseImage=styled.img`
       height:100px;
 `;
 
@@ -237,7 +237,7 @@ cursor:pointer;
 align-items:center;
 justify-content:center;
 
-${userImg}{
+${UseImage}{
     border-radius:50%;
     width:100%;
     height:100%;
