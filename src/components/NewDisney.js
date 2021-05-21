@@ -1,41 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import{Link} from "react-router-dom";
+import{useSelector}from "react-redux";
+import {selectNewDisney}from '../features/movie/movieSlice'
 
 function NewDisney() {
+    const movies=useSelector(selectNewDisney);
     return (
         <Container>
         <h4>New To Disney+</h4>
-         <Content>
-           <Wrap>
-           <Link to="/">
-               <img
-               src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/87F1DCF36049558159913ADFD18A800DE1121771540033ECA7651BBF154CEB/scale?width=400&aspectRatio=1.78&format=jpeg"
-               alt="" />
-           </Link>    
-             </Wrap>
-           <Wrap>
-           <Link to="/">
-               <img
-               src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/87F1DCF36049558159913ADFD18A800DE1121771540033ECA7651BBF154CEB/scale?width=400&aspectRatio=1.78&format=jpeg"
-               alt="" />
-           </Link>    
-             </Wrap>
-           <Wrap>
-           <Link to="/">
-               <img
-               src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/87F1DCF36049558159913ADFD18A800DE1121771540033ECA7651BBF154CEB/scale?width=400&aspectRatio=1.78&format=jpeg"
-               alt="" />
-           </Link>    
-             </Wrap>
-           <Wrap>
-           <Link to="/">
-               <img
-               src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/87F1DCF36049558159913ADFD18A800DE1121771540033ECA7651BBF154CEB/scale?width=400&aspectRatio=1.78&format=jpeg"
-               alt="" />
-           </Link>    
-             </Wrap>
-         </Content>  
+        <Content>
+        {movies && movies.map((movie,key)=>(
+                  <Wrap key={key}>
+                      {/* {movie.id} */}
+                    <Link to={'/detail/'+ movie.id}>
+                       <img src={movie.cardImg} alt={movie.title}/>
+                   </Link>
+                  </Wrap>
+              ))}
+          </Content>  
        </Container>
     )
 }
