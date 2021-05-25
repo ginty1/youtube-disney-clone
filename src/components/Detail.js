@@ -1,14 +1,38 @@
-import React from 'react'
 import styled from "styled-components";
+import React, { useState,useEffect } from 'react';
+import db from "../firebase/firebase";
+import {useParams} from "react-router-dom"
 
 function Detail(props) {
+const [detailData, setDetailData]=useState({});
+const {id}=useParams();
+useEffect(() => {
+    db.collection("Movies")
+    .doc(id)
+    .get()
+    .then((doc)=>{
+         if(doc.exists){
+             setDetailData(doc.data());
+        }else{
+            console.log('no such movie');
+         }
+    })
+    .catch(error=>console.log('error getting doc',error))
+},
+// making sure when the page changes the id gets updated 
+[id]);
+    console.log(detailData.titleImg);
     return (
         <Container>
             <Background>
-              <img src='https://s1.1zoom.me/big3/582/Inside_Out_(2015_film)_441512.jpg'/>
+              <img 
+                 src={detailData.backgroundImg}
+              alt={detailData.title}/>
             </Background>
               <ImageTitle>
-                <img src='https://www.seekpng.com/png/full/72-724774_disneypixar-inside-out-scented-products-scentco-disney-inside.png' alt=''/>
+                <img
+                src={detailData.titleImg}
+                   alt={detailData.title}/>
             </ImageTitle>
         <ContentMeta>
           <Controls>
@@ -24,6 +48,7 @@ function Detail(props) {
                   <span/>
               </AddList>
             <GroupWatch>
+            
                 <div>
                     <img src="/img/group-icon.png" alt=""/>
                 </div>
