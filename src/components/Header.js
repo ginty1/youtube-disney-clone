@@ -65,10 +65,11 @@ return (
                <img
                src='/img/logo.svg' alt='Disney+'/>
            </Logo>
-           
+           {/* if the user name doesnot exist -> login.js */}
           {!userName ? (
                 <Login onClick={handleAuth}>Login</Login> 
                  ):
+                // if it does -> home.js
                  (
                   <>
                  <NavMenu>
