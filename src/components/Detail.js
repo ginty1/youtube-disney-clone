@@ -55,10 +55,10 @@ useEffect(() => {
             </GroupWatch>
           </Controls>
           <SubTitle>
-              SubTitles
+              {detailData.subTitle}
           </SubTitle>
           <Description>
-              Discription
+              {detailData.description}
           </Description>
         </ContentMeta>
         </Container>
