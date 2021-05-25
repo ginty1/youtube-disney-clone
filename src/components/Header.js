@@ -65,44 +65,54 @@ return (
                <img
                src='/img/logo.svg' alt='Disney+'/>
            </Logo>
-             <NavMenu>
-                <a href="/home">
-                       <img src="/img/home-icon.svg" alt="HOME"/>
-                   <span>
-                      HOME
-                   </span>
-                   </a>
-                <a href="/search">
-                       <img src="/img/search-icon.svg" alt="SEARCH"/>
-                   <span>
-                      SEARCH
-                   </span>
-                   </a>
-                <a href="/watchlist">
-                <img src="/img/watchlist-icon.svg" alt="HOME"/>
-                   <span>
-                      WATCHLIST
-                   </span>
-                   </a>
-                <a href="/original">
-                       <img src="/img/original-icon.svg" alt="HOME"/>
-                   <span>
-                      ORIGINALS
-                   </span>
-                   </a>
-                <a href="/movies">
-                       <img src="/img/movie-icon.svg" alt="HOME"/>
-                   <span>
-                      MOVIE
-                   </span>
-                   </a>
-           </NavMenu>
-            <SignOut>
-           <UseImage src={userPhoto} alt={userName}/>
-           <DropDown>
-               <span onClick={handleAuth}>Sign out </span>
-           </DropDown>
-                </SignOut> 
+           
+          {!userName ? (
+                <Login onClick={handleAuth}>Login</Login> 
+                 ):
+                 (
+                  <>
+                 <NavMenu>
+                      <a href="/home">
+                             <img src="/img/home-icon.svg" alt="HOME"/>
+                         <span>
+                            HOME
+                         </span>
+                         </a>
+                      <a href="/search">
+                             <img src="/img/search-icon.svg" alt="SEARCH"/>
+                         <span>
+                            SEARCH
+                         </span>
+                         </a>
+                      <a href="/watchlist">
+                      <img src="/img/watchlist-icon.svg" alt="HOME"/>
+                         <span>
+                            WATCHLIST
+                         </span>
+                         </a>
+                      <a href="/original">
+                             <img src="/img/original-icon.svg" alt="HOME"/>
+                         <span>
+                            ORIGINALS
+                         </span>
+                         </a>
+                      <a href="/movies">
+                             <img src="/img/movie-icon.svg" alt="HOME"/>
+                         <span>
+                            MOVIE
+                         </span>
+                         </a>
+                 </NavMenu>
+                  <SignOut>
+                 <UseImage src={userPhoto} alt={userName}/>
+                 <DropDown>
+                     <span onClick={handleAuth}>Sign out </span>
+                 </DropDown>
+                      </SignOut> 
+                  </>)}
+      
+           
+           
 
         </Nav>
     )
